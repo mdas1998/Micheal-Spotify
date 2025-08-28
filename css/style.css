@@ -1,0 +1,571 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+/* ===============================
+   Root Variables (Theme Colors & Defaults)
+   ================================ */
+:root {
+  --bg: #000;
+  /* Page background color */
+  --panel: #121212;
+  /* Sidebar / panel background */
+  --panel-2: #252525;
+  /* Card / list background */
+  --text: #fff;
+  /* Main text color */
+  --muted: #a7a7a7;
+  /* Muted / secondary text */
+  --spotify: #1db954;
+  /* Spotify brand green */
+  --radius: 8px;
+  /* Default border radius */
+  --rounded-radius: 20px;
+}
+
+/* ===============================
+   Base Styles (Reset & Defaults)
+   ================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a var(--panel);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+
+.container {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  height: 100vh;
+  /* ✅ subtract playbar height */
+  box-sizing: border-box;
+}
+
+/* ===============================
+   Scrollbar Styling
+   ================================ */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--panel);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+/* ===============================
+   Layout (Sidebar & Main Content)
+   ================================ */
+/* Desktop default */
+.left {
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* ✅ match right section height */
+  overflow: hidden;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* ✅ match left section height */
+  overflow: hidden;
+}
+
+/* ===============================
+   Sidebar (Navigation & Library)
+   ================================ */
+
+
+.home ul {
+  list-style: none;
+  margin-top: 6px;
+}
+
+.home ul li,
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home ul li {
+  padding: 10px 0 6px;
+  font-weight: 600;
+}
+
+.home ul li img,
+.heading img {
+  width: 20px;
+}
+
+/* Library Section */
+.library {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 15px;
+  /* ✅ gives margin-like spacing inside */
+  box-sizing: border-box;
+}
+
+
+/* Sidebar Headings */
+.heading {
+  padding: 16px 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Sidebar Footer Links */
+.footer {
+  position: static;
+  /* ✅ no absolute */
+  margin-top: auto;
+  /* push to bottom */
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+
+
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+/* ===============================
+   Header (Top Navigation Bar)
+   ================================ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.header>* {
+  padding: 16px 20px;
+}
+
+.nav svg {
+  vertical-align: middle;
+}
+
+/* ===============================
+   Buttons
+   ================================ */
+.btn {
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+/* Ghost */
+.btn.ghost {
+  background: transparent;
+  color: #fff;
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--spotify);
+}
+
+/* Solid */
+.btn.solid {
+  background: #fff;
+  color: #000;
+}
+
+.btn.solid:hover {
+  background: var(--spotify);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* ===============================
+   Playlists & Cards
+   ================================ */
+.spotifyPlaylists {
+  flex: 1;
+  /* Fill space above playbar */
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+  margin: 20px 10px 30px;
+}
+
+.card {
+  background: var(--panel-2);
+  border-radius: var(--radius);
+  padding: 12px;
+  position: relative;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  background: #2a2a2a;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.card h2 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.card p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.play {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--spotify);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .45);
+  opacity: 0;
+  transform: translateY(10px) scale(.96);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.card:hover .play,
+.card:focus-within .play {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ===============================
+   Playbar
+   ================================ */
+.playbar {
+  background: var(--panel-2);
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius);
+  position: relative;
+  /* ✅ make .playbar a positioning parent */
+}
+
+.songbuttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 8px;
+}
+
+.songbuttons img {
+  width: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.songbuttons img:hover {
+  transform: scale(1.1);
+}
+
+/* Seekbar below buttons */
+.seekbar {
+  height: 4px;
+  width: 100%;
+  background: #ccc;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+}
+
+.seekbar .circle {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: var(--spotify);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  transition: left 0.5s;
+}
+
+/* ===============================
+   Songs List (Library Section)
+   ================================ */
+.songsList {
+  flex: 1;
+  /* ✅ take remaining space */
+  overflow-y: auto;
+}
+
+.songsList ul {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  gap: 12px;
+  cursor: pointer;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  background: var(--panel-2);
+  transition: background 0.2s ease;
+}
+
+.song-item:hover {
+  background: #2a2a2a;
+}
+
+.song-item .icon {
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.song-item .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.song-item .info .title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.song-item .info .artist {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.playnow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: var(--rounded-radius);
+}
+
+.playnow img {
+  width: 20px;
+  height: 20px;
+}
+
+.hamburger,
+.close {
+  display: none;
+}
+
+/* The volume container now controls the hover state */
+.volume {
+  position: absolute;
+  top: 50%;
+  right: 143px;
+  display: flex;
+  align-items: center;
+  /* This is the key change */
+  transform: translateY(-50%);
+  /* Centers the entire volume container vertically */
+  gap: 10px;
+  /* Adds space between the icon and the slider */
+}
+
+.volume-icon {
+  width: 24px;
+  height: auto;
+  cursor: pointer;
+}
+
+.volume-slider {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s 0.25s;
+  width: 120px;
+  accent-color: var(--text);
+  cursor: pointer;
+}
+
+/* show state */
+/* Now, hovering on the parent (.volume) makes the child (.volume-slider) appear */
+.volume:hover .volume-slider,
+.volume.open .volume-slider {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* desktop hover (only on non-touch screens) */
+@media (hover: hover) and (pointer: fine) {
+  .volume:hover .volume-slider {
+    display: block;
+  }
+}
+
+/* ===============================
+   Responsive (Mobile Devices)
+   ================================ */
+
+@media (max-width: 1200px) {
+  .container {
+    gap: 0;
+    padding: 0;
+  }
+
+  .left,
+  .right,
+  .playbar {
+    border-radius: 0;
+    /* if you’re using rounded corners */
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    /* remove heading margins */
+    padding: 10px;
+    /* optional: small padding for breathing space */
+  }
+
+  .left {
+    display: none;
+    /* hidden by default on small screens */
+  }
+
+  .left.active {
+    display: flex;
+    /* visible when hamburger adds "active" */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    flex-direction: column;
+    background-color: var(--bg);
+  }
+
+  .library {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* ✅ allows flex children to shrink */
+  }
+
+  .songsList {
+    flex: 1;
+    /* ✅ takes all remaining height */
+    overflow-y: auto;
+    /* ✅ scrollable */
+    padding-right: 6px;
+    /* ✅ so scrollbar doesn’t overlap text */
+  }
+
+  .footer {
+    flex-shrink: 0;
+    /* ✅ fixed at bottom */
+    margin-top: auto;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburgerContainer {
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .left .close {
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    width: 30px;
+    display: block;
+  }
+
+  /* ... (other mobile styles) */
+
+  .volume {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+  }
+
+  .volume-slider {
+    position: static;
+    width: 120px;
+    opacity: 1;          /* ✅ Always visible */
+    visibility: visible; /* ✅ Always visible */
+  }
+
+  .volume.open .volume-slider {
+    opacity: 1;
+    visibility: visible;
+  }
+}
