@@ -72,8 +72,13 @@ async function getSongs(folder) {
   currFolder = folder;
 
   try {
+    // below lines will run locally
+    // const a = await fetch(
+    //   `http://127.0.0.1:3000/24%20-%20Spotify%20Clone/${folder}/`
+    // );
+
     const a = await fetch(
-      `http://127.0.0.1:3000/24%20-%20Spotify%20Clone/${folder}/`
+      `/${folder}/`
     );
     const response = await a.text();
 
@@ -119,8 +124,13 @@ async function getSongs(folder) {
 }
 
 async function displayAlbums() {
+  // Below lines will run locally
+  // const a = await fetch(
+  //   `http://127.0.0.1:3000/24%20-%20Spotify%20Clone/songs/`
+  // );
+
   const a = await fetch(
-    `http://127.0.0.1:3000/24%20-%20Spotify%20Clone/songs/`
+    `/songs/`
   );
   const response = await a.text();
   let div = document.createElement("div");
@@ -134,8 +144,14 @@ async function displayAlbums() {
     if (e.href.includes("/songs")) {
       let folder = e.href.split("/").slice(-2)[0];
       // Get the metadata of the folder
+
+      //Below lines will run locally
+      // const a = await fetch(
+      //   `http://127.0.0.1:3000/24%20-%20Spotify%20Clone/songs/${folder}/info.json`
+      // );
+
       const a = await fetch(
-        `http://127.0.0.1:3000/24%20-%20Spotify%20Clone/songs/${folder}/info.json`
+        `/songs/${folder}/info.json`
       );
       const response = await a.json();
         cardContainer.innerHTML += `
