@@ -2,7 +2,7 @@ let songs = [];
 let currFolder;
 let allAlbums = {};
 
-let currentSong = new Audio();
+let currentSong = null; // no Audio yet
 let currentIndex = 0; // track which song is playing
 
 function formatTime(seconds) {
@@ -20,22 +20,52 @@ function getSongPath(folder, filename) {
 }
 
 const playMusic = (track, pause = false) => {
-  currentSong.pause();
-  currentSong.src = getSongPath(currFolder, track);
-  currentSong.load();
+  // Stop previous audio if exists
+  if (currentSong) {
+    currentSong.pause();
+    currentSong.src = "";
+    currentSong = null;
+  }
+
+  // Create new audio object
+  currentSong = new Audio(getSongPath(currFolder, track));
 
   document.querySelector(".songinfo").innerHTML = decodeURIComponent(track);
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
   document.querySelector(".circle").style.left = "0%";
 
   if (!pause) {
-    currentSong.play().catch(err => console.error("❌ Play error", err));
+    currentSong.play().catch(err => {
+      if (err.name !== "AbortError") {
+        console.error("❌ Play error", err);
+      }
+    });
     play.src = "assets/pause.svg";
   } else {
     play.src = "assets/play.svg";
   }
 
   currentIndex = songs.indexOf(track);
+
+  // Reattach listeners every time we create a new Audio
+  currentSong.addEventListener("loadedmetadata", () => {
+    document.querySelector(".songtime").innerHTML =
+      `00:00 / ${formatTime(currentSong.duration)}`;
+    document.querySelector(".circle").style.left = "0%";
+  });
+
+  currentSong.addEventListener("timeupdate", () => {
+    document.querySelector(".songtime").innerHTML =
+      `${formatTime(currentSong.currentTime)} / ${formatTime(currentSong.duration)}`;
+    document.querySelector(".circle").style.left =
+      (currentSong.currentTime / currentSong.duration) * 100 + "%";
+  });
+
+  currentSong.addEventListener("ended", () => {
+    if (songs.length === 0) return;
+    currentIndex = (currentIndex + 1) % songs.length;
+    playMusic(songs[currentIndex]);
+  });
 };
 
 // Format song names into { artist, title }
@@ -146,12 +176,6 @@ async function main() {
 
   displayAlbums();
 
-  currentSong.addEventListener("loadedmetadata", () => {
-    document.querySelector(".songtime").innerHTML =
-      `00:00 / ${formatTime(currentSong.duration)}`;
-    document.querySelector(".circle").style.left = "0%";
-  });
-
   // Delegate clicks for songs
   document.querySelector(".songsList").addEventListener("click", (ev) => {
     const li = ev.target.closest("li.song-item");
@@ -162,6 +186,7 @@ async function main() {
 
   // Play / Pause button
   play.addEventListener("click", () => {
+    if (!currentSong) return;
     if (currentSong.paused) {
       currentSong.play();
       play.src = "assets/pause.svg";
@@ -171,16 +196,9 @@ async function main() {
     }
   });
 
-  // Update seekbar + time
-  currentSong.addEventListener("timeupdate", () => {
-    document.querySelector(".songtime").innerHTML =
-      `${formatTime(currentSong.currentTime)} / ${formatTime(currentSong.duration)}`;
-    document.querySelector(".circle").style.left =
-      (currentSong.currentTime / currentSong.duration) * 100 + "%";
-  });
-
   // Seekbar click
   document.querySelector(".seekbar").addEventListener("click", (e) => {
+    if (!currentSong) return;
     const pct = e.offsetX / e.target.getBoundingClientRect().width;
     document.querySelector(".circle").style.left = pct * 100 + "%";
     currentSong.currentTime = currentSong.duration * pct;
@@ -241,13 +259,6 @@ async function main() {
     playMusic(songs[currentIndex]);
   });
 
-  // Auto-play next when song ends
-  currentSong.addEventListener("ended", () => {
-    if (songs.length === 0) return;
-    currentIndex = (currentIndex + 1) % songs.length;
-    playMusic(songs[currentIndex]);
-  });
-
   // Volume
   const volume = document.querySelector(".volume");
   const volumeIcon = document.querySelector(".volume-icon");
@@ -269,11 +280,12 @@ async function main() {
   const volumeSlider = document.querySelector(".volume-slider");
   if (volumeSlider) {
     volumeSlider.addEventListener("input", (e) => {
-      currentSong.volume = e.target.value;
+      if (currentSong) currentSong.volume = e.target.value;
     });
   }
 
   document.querySelector(".volume img").addEventListener("click", e => {
+    if (!currentSong) return;
     if (e.target.src.includes("volume.svg")) {
       e.target.src = e.target.src.replace("volume.svg", "mute.svg");
       currentSong.volume = 0;
