@@ -1,0 +1,106 @@
+{
+  "Chill Vibes": {
+    "folder": "Chill Vibes",
+    "info": {
+      "title": "Chill Vibes",
+      "Description": "check your vibes"
+    },
+    "songs": [
+      "Misery.mp3",
+      "Not Afraid_1.mp3",
+      "numb.mp3",
+      "One Direction - Drag Me Down  mp3clan.com .mp3",
+      "Powerless.mp3",
+      "R. City - Locked Away (ft. Adam Levine)  mp3clan.com .mp3",
+      "RedOne - Dont You Need Somebody (ft. Enrique Iglesias) [320].mp3",
+      "remember the name.mp3",
+      "Shake that ass.mp3",
+      "She Doesn't Mind.mp3",
+      "Sia feat. Sean Paul - Cheap Thrills  mp3clan.com .mp3",
+      "SOSringtone.mp3"
+    ]
+  },
+  "CS": {
+    "folder": "CS",
+    "info": {
+      "title": "Sleep Songs",
+      "Description": "Songs for you"
+    },
+    "songs": [
+      "03-Marry-Me.mp3",
+      "03_burning_in_the_skies - Copy.mp3",
+      "03_burning_in_the_skies.mp3",
+      "04 Demons.mp3",
+      "04 Who Says.mp3",
+      "04. Firework.mp3",
+      "05 On Top of the World.mp3",
+      "05.Shadow_Of_The_Day.mp3"
+    ]
+  },
+  "NCS": {
+    "folder": "NCS",
+    "info": {
+      "title": "No CopyRight Songs",
+      "Description": "Songs for you"
+    },
+    "songs": [
+      "01 Lovers on the Sun (feat. Sam Mart.mp3",
+      "01. A Light That Never Comes (Linkin Park & Steve Aoki).mp3",
+      "02 - Dynamite (80 s Progressive Mix) [www.DJMaza.Com] - Copy.mp3",
+      "06 Legacy.mp3",
+      "R. City - Locked Away (ft. Adam Levine)  mp3clan.com .mp3",
+      "RedOne - Dont You Need Somebody (ft. Enrique Iglesias) [320].mp3",
+      "Tiesto_Red_Lights_Original_Mix_PN.mp3",
+      "Wrestlemania28 official song.mp3"
+    ]
+  },
+  "Rejoice": {
+    "folder": "Rejoice",
+    "info": {
+      "title": "Rejoice",
+      "Description": "Life is Good"
+    },
+    "songs": [
+      "Space Bound.mp3",
+      "Taio Cruz ft. Ludacris - Break Your Heart  mp3clan.com .mp3",
+      "Thrift Shop.mp3",
+      "Tiesto_Red_Lights_Original_Mix_PN.mp3",
+      "Tonight (I'm lovin' you).mp3",
+      "Uptown Funk.mp3",
+      "WrestleMania XXVI.mp3",
+      "Wrestlemania28 official song.mp3",
+      "Written in the stars.mp3",
+      "You just want my money.mp3",
+      "Yves Larock - Rise Up.mp3"
+    ]
+  },
+  "Young": {
+    "folder": "Young",
+    "info": {
+      "title": "Young",
+      "Description": "Dumb Young and Broke"
+    },
+    "songs": [
+      "Tones And I - Dance Monkey .mp3",
+      "Train - Hey, Soul Sister .mp3",
+      "Travis Scott - HIGHEST IN THE ROOM.mp3",
+      "Twenty One Pilots - Chlorine.mp3",
+      "Tyler, The Creator - Earfquake (feat. Playboi Carti) .mp3",
+      "Tyler, The Creator - Earfquake .mp3",
+      "Why Don't We - I Don’t Belong in This Club (feat. Macklemore).mp3",
+      "Why don't we - What Am I.mp3",
+      "Why Don`t We - Big Plans .mp3",
+      "Y2k, Bbno$ - Lalala .mp3",
+      "Ybn Cordae - What's Life .mp3",
+      "Yg Feat. Tyga, Jon Z - Go Loko .mp3",
+      "Young Thug - Hot (ft. Gunna) .mp3",
+      "Young Thug - Hot (Remix) [feat. Gunna and Travis Scott].mp3",
+      "Young Thug Feat. J. Cole, Travis Scott - The London (feat. J. Cole  Travis Scott) .mp3",
+      "Yungblud - 11 Minutes (with Halsey Feat. Travis Barker) .mp3",
+      "Zara Larsson - Don`t Worry Bout Me .mp3",
+      "Zayn & Zhavia Ward - A Whole New World (End Title).mp3",
+      "Zedd, Katy Perry - 365 .mp3",
+      "Zedd, Kehlani - Good Thing.mp3"
+    ]
+  }
+}
